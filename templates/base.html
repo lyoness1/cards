@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Cards</title>
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+  <!-- Flash messages -->
+  <div class="row">
+    <div class="col-md-12">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-success text-center">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+
+</div>
+
+  {% block content %} 
+    <!-- child template content goes here -->
+  {% endblock %}
+
+</body>
+</html>
+
