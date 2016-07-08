@@ -18,7 +18,7 @@ class Card(object):
 
     def __cmp__(self, other):
         """Compares the values of the cards' ranks. Aces low, ATM"""
-        return cmp(RANK[self.rank], RANK[other.rank])
+        return cmp(RANKS[self.rank], RANKS[other.rank])
 
     def get_rank(self):
         """Returns card's rank"""
@@ -71,7 +71,7 @@ class Deck(object):
         """Sorts the cards by suit, rank"""
         self.cards.sort()
 
-    def deal_cards(self, hand, num):
+    def move_cards(self, hand, num):
         """deals num cards from deck into hand
 
         hand: destination Hand object
@@ -81,9 +81,21 @@ class Deck(object):
             hand.add_card(self.pop_card())
 
 
-# Hand inherits from Deck because it has similar behaviors
 class Hand(Deck):
     def __init__(self, player=""):
         """Creates a list to store cards, assigns a player to the hand"""
         self.cards = []
         self.player = player
+
+
+if __name__ == '__main__':
+    deck = Deck()
+    deck.shuffle()
+    deck.shuffle()
+    deck.shuffle()
+
+    hand = Hand()
+
+    deck.move_cards(hand, 5)
+    hand.sort_cards()
+    print hand
