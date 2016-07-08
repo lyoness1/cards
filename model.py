@@ -1,7 +1,9 @@
 """Model for cards and decks"""
 
-SUITS = {"S", "D", "C", "H"}
-RANKS = {"A": [1, 14], "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8,
+from random import shuffle
+
+SUITS = {"S": 4, "D": 3, "C": 2, "H": 1}
+RANKS = {"A": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8,
          "9": 9, "10": 10, "J": 11, "Q": 12, "K": 13}
 
 class Card(object):
@@ -13,10 +15,10 @@ class Card(object):
         self.suit = suit
 
     def __str__(self):
-        return rank + suit
+        return self.rank + self.suit
 
     def __repr__(self):
-        return rank + suit
+        return self.rank + self.suit
 
     def get_rank(self):
         return self.rank
@@ -27,14 +29,21 @@ class Card(object):
 
 class Deck(object):
 
-    # A set - representing a deck - to store 52 Card objects
-    deck = set()
+    # instatiates a list - representing a deck - to store 52 Card objects
+    _deck = []
 
     def __init__(self):
-        """Makes 52 cards from each suit, rank. Adds Cards to deck set"""
+        """Makes 52 cards from each suit, rank. Adds Cards to deck list"""
 
         for suit in SUITS:
             for rank in RANKS:
-                deck.add(Card(suit, rank))
+                self._deck.append(Card(rank, suit))
 
-    def __str__(self):
+    def __repr__(self):
+        return str(self._deck)
+
+    def __iter__(self):
+        return iter(self._deck)
+
+    def shuffle(self):
+        return shuffle(self._deck)
